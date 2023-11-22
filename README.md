@@ -7,7 +7,7 @@ npm i -D img-compression-plugin
 ## 使用
 在`webpack.config.js`文件中使用
 ```js
-const ImgCompressionPlugin = require('./plugins/ImgCompressionPlugin.js')
+const ImgCompressionPlugin = require('img-compression-plugin')
 module.exports = {
   plugins: [
     new ImgCompressionPlugin()
@@ -18,7 +18,7 @@ module.exports = {
 - fileType `数组` 需要压缩的图片类型 (默认为 `['png', 'jpg', 'jpeg']` )
 - quality `数组` 压缩值域 (默认为 `[0.6, 0.8]` )
 ```js
-const ImgCompressionPlugin = require('./plugins/ImgCompressionPlugin.js')
+const ImgCompressionPlugin = require('img-compression-plugin')
 module.exports = {
   plugins: [
     new ImgCompressionPlugin({
