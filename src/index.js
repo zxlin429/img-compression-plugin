@@ -51,13 +51,13 @@ module.exports = class ImgCompressionPlugin {
       for (let assetId of fileArr) {
         if (moduleCache[assetId]) {
           compilation.updateAsset(assetId, new RawSource(getBufferFromSource(moduleCache[assetId])))
-          return
-        }
-        const source = compilation.assets[assetId].source()
-        let res = await imageGzip(source, this.quality, { imagemin: imagemin.default, imageminJpegtran: imageminJpegtran.default, imageminPngquant: imageminPngquant.default })
-        if (res) {
-          moduleCache[assetId] = res
-          compilation.updateAsset(assetId, new RawSource(getBufferFromSource(res)))
+        } else {
+          const source = compilation.assets[assetId].source()
+          let res = await imageGzip(source, this.quality, { imagemin: imagemin.default, imageminJpegtran: imageminJpegtran.default, imageminPngquant: imageminPngquant.default })
+          if (res) {
+            moduleCache[assetId] = res
+            compilation.updateAsset(assetId, new RawSource(getBufferFromSource(res)))
+          }
         }
       }
       callback()

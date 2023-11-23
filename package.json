@@ -1,6 +1,6 @@
 {
   "name": "img-compression-plugin",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "图片压缩插件",
   "main": "src/index.js",
   "scripts": {
