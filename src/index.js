@@ -1,14 +1,7 @@
-/*
- * @Author       : zxlin
- * @Date         : 2023-11-22 09:22:39
- * @LastEditors  : zxlin
- * @LastEditTime : 2023-11-22 11:22:28
- * @FilePath     : \img-compression-plugin\src\index.js
- * @Description  : 
- */
 const { RawSource } = require('webpack-sources')
 const defaultFileType = ['png', 'jpg', 'jpeg'] // 默认图片类型
 const defaultQuality = [0.6, 0.8] // 默认压缩值域
+const moduleCache = {}
 /**
  * 源码转换为buffer
  * @param {String|Buffer} source 源码
@@ -56,9 +49,16 @@ module.exports = class ImgCompressionPlugin {
       const imageminPngquant = await import('imagemin-pngquant')
       const fileArr = Object.keys(compilation.assets).filter(assetId => (this.option.fileType || defaultFileType).includes(assetId.slice(assetId.lastIndexOf('.') + 1)))
       for (let assetId of fileArr) {
+        if (moduleCache[assetId]) {
+          compilation.updateAsset(assetId, new RawSource(getBufferFromSource(moduleCache[assetId])))
+          return
+        }
         const source = compilation.assets[assetId].source()
         let res = await imageGzip(source, this.quality, { imagemin: imagemin.default, imageminJpegtran: imageminJpegtran.default, imageminPngquant: imageminPngquant.default })
-        res && compilation.updateAsset(assetId, new RawSource(getBufferFromSource(res)))
+        if (res) {
+          moduleCache[assetId] = res
+          compilation.updateAsset(assetId, new RawSource(getBufferFromSource(res)))
+        }
       }
       callback()
     })
