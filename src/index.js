@@ -1,6 +1,6 @@
 const { RawSource } = require('webpack-sources')
 const defaultFileType = ['png', 'jpg', 'jpeg'] // 默认图片类型
-const defaultQuality = [0.6, 0.8] // 默认压缩值域
+const defaultQuality = [0.1, 0.5] // 默认压缩值域
 const moduleCache = {}
 /**
  * 源码转换为buffer

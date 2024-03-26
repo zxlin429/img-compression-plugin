@@ -1,5 +1,14 @@
+<!--
+ * @Author       : zxlin
+ * @Date         : 2023-11-22 11:25:56
+ * @LastEditors  : zxlin
+ * @LastEditTime : 2024-03-26 11:37:18
+ * @FilePath     : \img-compression-plugin\README.md
+ * @Description  : 
+-->
 # img-compression-plugin
 轻量级图片压缩webpack插件
+> 降低imagemin版本,解决无法拉取依赖问题
 ## 安装
 ```npm
 npm i -D img-compression-plugin
